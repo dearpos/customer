@@ -2,9 +2,9 @@
 
 namespace Dearpos\Customer;
 
+use Dearpos\Customer\Commands\CustomerCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Dearpos\Customer\Commands\CustomerCommand;
 
 class CustomerServiceProvider extends PackageServiceProvider
 {
