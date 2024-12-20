@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Dearpos\Customer\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class CustomerCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'customer';
 
     public $description = 'My command';
 
