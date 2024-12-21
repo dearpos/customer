@@ -34,6 +34,12 @@ class CustomerServiceProvider extends PackageServiceProvider
     {
         parent::boot();
 
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+
+        $this->publishesMigrations([
+            __DIR__.'/../database/migrations' => database_path('migrations'),
+        ]);
+
         $this->loadRoutesFrom(__DIR__.'/../routes/api.php');
     }
 }
