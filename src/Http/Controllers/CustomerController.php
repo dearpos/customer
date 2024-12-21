@@ -64,7 +64,7 @@ class CustomerController extends Controller
                     'event' => 'created',
                     'old_values' => null,
                     'new_values' => $customer->toArray(),
-                    'user_id' => auth()->id(),
+                    'user_id' => request()->user()->id,
                     'created_at' => now(),
                 ]);
             }
@@ -116,7 +116,7 @@ class CustomerController extends Controller
                     'event' => 'updated',
                     'old_values' => $oldValues,
                     'new_values' => $customer->toArray(),
-                    'user_id' => auth()->id(),
+                    'user_id' => request()->user()->id,
                     'created_at' => now(),
                 ]);
             }
@@ -151,7 +151,7 @@ class CustomerController extends Controller
                     'event' => 'deleted',
                     'old_values' => $oldValues,
                     'new_values' => null,
-                    'user_id' => auth()->id(),
+                    'user_id' => request()->user()->id,
                     'created_at' => now(),
                 ]);
             }
