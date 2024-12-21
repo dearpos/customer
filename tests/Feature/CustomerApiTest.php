@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 class CustomerApiTest extends TestCase
 {
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
         $this->baseUrl = '/api/customers';
@@ -22,7 +22,7 @@ class CustomerApiTest extends TestCase
             ->count(15)
             ->create();
 
-        $response = $this->getJson($this->baseUrl . '?per_page=10');
+        $response = $this->getJson($this->baseUrl.'?per_page=10');
 
         $response->assertOk()
             ->assertJsonStructure([
@@ -91,14 +91,12 @@ class CustomerApiTest extends TestCase
         $response = $this->postJson($this->baseUrl, $data);
 
         $response->assertCreated()
-            ->assertJson(fn (AssertableJson $json) =>
-                $json->has('data', fn (AssertableJson $json) =>
-                    $json->where('code', 'CUST001')
-                        ->where('name', 'John Doe')
-                        ->has('addresses')
-                        ->has('contacts')
-                        ->etc()
-                )
+            ->assertJson(fn (AssertableJson $json) => $json->has('data', fn (AssertableJson $json) => $json->where('code', 'CUST001')
+                ->where('name', 'John Doe')
+                ->has('addresses')
+                ->has('contacts')
+                ->etc()
+            )
             );
     }
 
@@ -109,18 +107,16 @@ class CustomerApiTest extends TestCase
             ->has(CustomerGroup::factory(), 'group')
             ->create();
 
-        $response = $this->getJson($this->baseUrl . '/' . $customer->id);
+        $response = $this->getJson($this->baseUrl.'/'.$customer->id);
 
         $response->assertOk()
-            ->assertJson(fn (AssertableJson $json) =>
-                $json->has('data', fn (AssertableJson $json) =>
-                    $json->where('id', $customer->id)
-                        ->where('name', $customer->name)
-                        ->has('group')
-                        ->has('addresses')
-                        ->has('contacts')
-                        ->etc()
-                )
+            ->assertJson(fn (AssertableJson $json) => $json->has('data', fn (AssertableJson $json) => $json->where('id', $customer->id)
+                ->where('name', $customer->name)
+                ->has('group')
+                ->has('addresses')
+                ->has('contacts')
+                ->etc()
+            )
             );
     }
 
@@ -142,7 +138,7 @@ class CustomerApiTest extends TestCase
             'status' => 'inactive',
         ];
 
-        $response = $this->putJson($this->baseUrl . '/' . $customer->id, $data);
+        $response = $this->putJson($this->baseUrl.'/'.$customer->id, $data);
 
         $response->assertOk()
             ->assertJsonPath('data.name', $data['name'])
@@ -162,7 +158,7 @@ class CustomerApiTest extends TestCase
             ->state(['current_balance' => 1000000])
             ->create();
 
-        $response = $this->deleteJson($this->baseUrl . '/' . $customer->id);
+        $response = $this->deleteJson($this->baseUrl.'/'.$customer->id);
 
         $response->assertUnprocessable()
             ->assertJson([

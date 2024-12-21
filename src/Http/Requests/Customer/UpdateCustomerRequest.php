@@ -25,7 +25,7 @@ class UpdateCustomerRequest extends FormRequest
             'phone' => ['nullable', 'string', 'max:20'],
             'mobile' => ['nullable', 'string', 'max:20'],
             'tax_number' => ['nullable', 'string', 'max:50'],
-            'credit_limit' => ['required', 'numeric', 'min:' . $creditLimit['min'], 'max:' . $creditLimit['max']],
+            'credit_limit' => ['required', 'numeric', 'min:'.$creditLimit['min'], 'max:'.$creditLimit['max']],
             'notes' => ['nullable', 'string'],
             'status' => ['required', Rule::in($statuses)],
         ];
