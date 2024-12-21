@@ -2,6 +2,7 @@
 
 use Dearpos\Customer\Models\Customer;
 use Dearpos\Customer\Models\CustomerGroup;
+
 use function Pest\Laravel\postJson;
 
 beforeEach(function () {

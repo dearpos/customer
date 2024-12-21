@@ -2,6 +2,7 @@
 
 use Dearpos\Customer\Models\Customer;
 use Dearpos\Customer\Models\CustomerGroup;
+
 use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
@@ -18,7 +19,7 @@ test('can list customers with pagination', function () {
         ->create();
 
     // Act
-    $response = getJson($this->baseUrl . '?per_page=10');
+    $response = getJson($this->baseUrl.'?per_page=10');
 
     // Assert
     $response->assertOk()
@@ -108,7 +109,7 @@ test('can show customer with relationships', function () {
         ->create();
 
     // Act
-    $response = getJson($this->baseUrl . '/' . $customer->id);
+    $response = getJson($this->baseUrl.'/'.$customer->id);
 
     // Assert
     $response->assertOk()
@@ -152,7 +153,7 @@ test('can update customer', function () {
     ];
 
     // Act
-    $response = putJson($this->baseUrl . '/' . $customer->id, $data);
+    $response = putJson($this->baseUrl.'/'.$customer->id, $data);
 
     // Assert
     $response->assertOk()
@@ -173,7 +174,7 @@ test('can delete customer without balance', function () {
         ->create();
 
     // Act
-    $response = deleteJson($this->baseUrl . '/' . $customer->id);
+    $response = deleteJson($this->baseUrl.'/'.$customer->id);
 
     // Assert
     $response->assertOk()
@@ -189,7 +190,7 @@ test('cannot delete customer with balance', function () {
         ->create();
 
     // Act
-    $response = deleteJson($this->baseUrl . '/' . $customer->id);
+    $response = deleteJson($this->baseUrl.'/'.$customer->id);
 
     // Assert
     $response->assertUnprocessable()

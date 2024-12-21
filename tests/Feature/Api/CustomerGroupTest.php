@@ -2,6 +2,7 @@
 
 use Dearpos\Customer\Models\Customer;
 use Dearpos\Customer\Models\CustomerGroup;
+
 use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
@@ -16,7 +17,7 @@ test('can list customer groups with pagination', function () {
     CustomerGroup::factory()->count(15)->create();
 
     // Act
-    $response = getJson($this->baseUrl . '?per_page=10');
+    $response = getJson($this->baseUrl.'?per_page=10');
 
     // Assert
     $response->assertOk()
@@ -77,7 +78,7 @@ test('can show customer group', function () {
     $group = CustomerGroup::factory()->create();
 
     // Act
-    $response = getJson($this->baseUrl . '/' . $group->id);
+    $response = getJson($this->baseUrl.'/'.$group->id);
 
     // Assert
     $response->assertOk()
@@ -108,7 +109,7 @@ test('can update customer group', function () {
     ];
 
     // Act
-    $response = putJson($this->baseUrl . '/' . $group->id, $data);
+    $response = putJson($this->baseUrl.'/'.$group->id, $data);
 
     // Assert
     $response->assertOk()
@@ -125,7 +126,7 @@ test('cannot delete customer group with existing customers', function () {
         ->create();
 
     // Act
-    $response = deleteJson($this->baseUrl . '/' . $group->id);
+    $response = deleteJson($this->baseUrl.'/'.$group->id);
 
     // Assert
     $response->assertUnprocessable()
@@ -137,7 +138,7 @@ test('can delete customer group without customers', function () {
     $group = CustomerGroup::factory()->create();
 
     // Act
-    $response = deleteJson($this->baseUrl . '/' . $group->id);
+    $response = deleteJson($this->baseUrl.'/'.$group->id);
 
     // Assert
     $response->assertOk()

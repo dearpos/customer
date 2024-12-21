@@ -26,12 +26,12 @@ class StoreCustomerRequest extends FormRequest
             'phone' => ['nullable', 'string', 'max:20'],
             'mobile' => ['nullable', 'string', 'max:20'],
             'tax_number' => ['nullable', 'string', 'max:50'],
-            'credit_limit' => ['required', 'numeric', 'min:' . $creditLimit['min'], 'max:' . $creditLimit['max']],
+            'credit_limit' => ['required', 'numeric', 'min:'.$creditLimit['min'], 'max:'.$creditLimit['max']],
             'notes' => ['nullable', 'string'],
             'status' => ['required', Rule::in($statuses)],
 
             // Address
-            'addresses' => ['required', 'array', 'min:' . config('customer.address.min_addresses')],
+            'addresses' => ['required', 'array', 'min:'.config('customer.address.min_addresses')],
             'addresses.*.address_type' => ['required', Rule::in($addressTypes)],
             'addresses.*.address_line_1' => ['required', 'string', 'max:255'],
             'addresses.*.address_line_2' => ['nullable', 'string', 'max:255'],
@@ -57,15 +57,15 @@ class StoreCustomerRequest extends FormRequest
         return [
             function ($validator) {
                 // Validate at least one default address if required
-                if (config('customer.address.require_default') && !collect($this->input('addresses'))->contains('is_default', true)) {
+                if (config('customer.address.require_default') && ! collect($this->input('addresses'))->contains('is_default', true)) {
                     $validator->errors()->add('addresses', 'At least one address must be set as default.');
                 }
 
                 // Validate at least one primary contact if required
-                if (config('customer.contact.require_primary') && !collect($this->input('contacts'))->contains('is_primary', true)) {
+                if (config('customer.contact.require_primary') && ! collect($this->input('contacts'))->contains('is_primary', true)) {
                     $validator->errors()->add('contacts', 'At least one contact must be set as primary.');
                 }
-            }
+            },
         ];
     }
 }
