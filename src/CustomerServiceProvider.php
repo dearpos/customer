@@ -25,7 +25,7 @@ class CustomerServiceProvider extends PackageServiceProvider
                 'create_customer_addresses_table',
                 'create_customer_contacts_table',
                 'create_customer_audits_table',
-                'create_customer_credit_history_table'
+                'create_customer_credit_history_table',
             ])
             ->hasCommand(CustomerCommand::class);
     }
