@@ -6,5 +6,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('api')->group(function () {
     Route::apiResource('customers', CustomerController::class);
-    Route::apiResource('customer-groups', CustomerGroupController::class);
+
+    Route::prefix('customers')->group(function () {
+        Route::apiResource('customer-groups', CustomerGroupController::class);
+    });
 });
