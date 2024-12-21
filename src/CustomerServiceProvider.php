@@ -19,7 +19,14 @@ class CustomerServiceProvider extends PackageServiceProvider
             ->name('customer')
             ->hasConfigFile()
             ->hasViews()
-            ->hasMigration('create_customer_table')
+            ->hasMigrations([
+                'create_customer_groups_table',
+                'create_customers_table',
+                'create_customer_addresses_table',
+                'create_customer_contacts_table',
+                'create_customer_audits_table',
+                'create_customer_credit_history_table'
+            ])
             ->hasCommand(CustomerCommand::class);
     }
 }
