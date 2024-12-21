@@ -29,4 +29,11 @@ class CustomerServiceProvider extends PackageServiceProvider
             ])
             ->hasCommand(CustomerCommand::class);
     }
+
+    public function boot()
+    {
+        parent::boot();
+
+        $this->loadRoutesFrom(__DIR__.'/../routes/api.php');
+    }
 }
